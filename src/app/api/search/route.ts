@@ -67,8 +67,10 @@ export async function GET(request: Request) {
           if (filteredResults.length !== 0) {
             hasResults = true;
           }
+          // 过滤掉没有剧集的结果
+          filteredResults = filteredResults.filter((result) => result.episodes && result.episodes.length > 0);
           if (!config.SiteConfig.DisableYellowFilter) {
-            filteredResults = pageResults.filter((result) => {
+            filteredResults = filteredResults.filter((result) => {
               const typeName = result.type_name || '';
               return !yellowWords.some((word) => typeName.includes(word));
             });
@@ -131,8 +133,10 @@ export async function GET(request: Request) {
           if (filteredResults.length !== 0) {
             hasResults = true;
           }
+          // 过滤掉没有剧集的结果
+          filteredResults = filteredResults.filter((result) => result.episodes && result.episodes.length > 0);
           if (!config.SiteConfig.DisableYellowFilter) {
-            filteredResults = pageResults.filter((result) => {
+            filteredResults = filteredResults.filter((result) => {
               const typeName = result.type_name || '';
               return !yellowWords.some((word) => typeName.includes(word));
             });
